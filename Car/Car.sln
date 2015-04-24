@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Car", "Car\Car.vcxproj", "{2A5C336C-3F6F-4FEC-90E9-DEE4842FEBEE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "car_tests", "car_tests\car_tests.vcxproj", "{0E4515F7-EB0C-44EA-A5A0-20C441D53565}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A5C336C-3F6F-4FEC-90E9-DEE4842FEBEE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A5C336C-3F6F-4FEC-90E9-DEE4842FEBEE}.Debug|Win32.Build.0 = Debug|Win32
+		{2A5C336C-3F6F-4FEC-90E9-DEE4842FEBEE}.Release|Win32.ActiveCfg = Release|Win32
+		{2A5C336C-3F6F-4FEC-90E9-DEE4842FEBEE}.Release|Win32.Build.0 = Release|Win32
+		{0E4515F7-EB0C-44EA-A5A0-20C441D53565}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0E4515F7-EB0C-44EA-A5A0-20C441D53565}.Debug|Win32.Build.0 = Debug|Win32
+		{0E4515F7-EB0C-44EA-A5A0-20C441D53565}.Release|Win32.ActiveCfg = Release|Win32
+		{0E4515F7-EB0C-44EA-A5A0-20C441D53565}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
