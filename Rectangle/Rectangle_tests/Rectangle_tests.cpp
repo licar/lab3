@@ -56,23 +56,6 @@ BOOST_AUTO_TEST_CASE(ValuesHaveInterval)
 	BOOST_CHECK_EQUAL(rectangle.GetRight(), 3);
 }
 
-BOOST_AUTO_TEST_CASE(SetOfOneValueChangeAnotherValues)
-{
-	CRectangle rectangle(1, 2, 2, 4);
-	rectangle.SetLeft(0);
-	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 3);
-	rectangle.SetTop(4);
-	BOOST_CHECK_EQUAL(rectangle.GetHeight(), 6);
-	rectangle.SetHeight(3);
-	BOOST_CHECK_EQUAL(rectangle.GetBottom(), 1);
-	rectangle.SetWidth(3);
-	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 3);
-	rectangle.SetBottom(-7);
-	BOOST_CHECK_EQUAL(rectangle.GetHeight(), 11);
-	rectangle.SetRight(12);
-	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 12);
-}
-
 BOOST_AUTO_TEST_CASE(CanGiveAreaAndPerimeter)
 {
 	CRectangle rectangle(1, 1, 2, 2);

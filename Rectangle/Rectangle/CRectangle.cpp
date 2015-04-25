@@ -1,23 +1,18 @@
 #include "stdafx.h"
 #include "CRectangle.h"
+#include <algorithm>
 
+CRectangle::CRectangle()
+{
+}
 
 CRectangle::CRectangle(int left, int top,
 	int width, int heigth)
-	:m_left(left), m_top(top),
-	m_width(width), m_height(heigth)
+	:m_left(left),
+	m_top(top),
+	m_width(std::max(0, width)),
+	m_height(std::max(0, heigth))
 {
-	if (width < 0)
-	{
-		m_width = 0;
-	}
-	if (heigth < 0)
-	{
-		m_height = 0;
-	}
-
-	m_right = m_left + m_width;
-	m_bottom = m_top - m_height;
 }
 
 CRectangle::~CRectangle()
@@ -41,12 +36,12 @@ int CRectangle::GetLeft() const
 
 int CRectangle::GetRight() const
 {
-	return m_right;
+	return m_left + m_width;
 }
 
 int CRectangle::GetBottom() const
 {
-	return m_bottom;
+	return m_top - m_height;
 }
 
 int CRectangle::GetTop() const
@@ -66,28 +61,12 @@ unsigned CRectangle::GetPerimeter() const
 
 void CRectangle::SetHeight(int height)
 {
-	if (height < 0)
-	{
-		m_height = 0;
-	}
-	else
-	{
-		m_height = height;
-	}
-	m_bottom = DetermBottom(GetTop(), GetHeight());
+	m_height = std::max(0, height);
 }
 
 void CRectangle::SetWidth(int width)
 {
-	if (width < 0)
-	{
-		m_width = 0;
-	}
-	else
-	{
-		m_width = width;
-	}
-	m_right = DetermRight(GetLeft(), GetWidth());
+	m_width = std::max(0, width);
 }
 
 void CRectangle::SetLeft(int left)
@@ -97,7 +76,6 @@ void CRectangle::SetLeft(int left)
 		return;
 	}
 	m_left = left;
-	m_width = DetermWidth(GetLeft(), GetRight());
 }
 
 void CRectangle::SetTop(int top)
@@ -107,7 +85,6 @@ void CRectangle::SetTop(int top)
 		return;
 	}
 	m_top = top;
-	m_height = DetermHeight(GetTop(), GetBottom());
 }
 
 void CRectangle::SetRight(int right)
@@ -116,8 +93,7 @@ void CRectangle::SetRight(int right)
 	{
 		return;
 	}
-	m_right = right;
-	m_width = DetermWidth(GetLeft(), GetRight());
+	m_width = right - m_left;
 }
 
 void CRectangle::SetBottom(int bottom)
@@ -126,15 +102,12 @@ void CRectangle::SetBottom(int bottom)
 	{
 		return;
 	}
-	m_bottom = bottom;
-	m_height = DetermHeight(GetTop(), GetBottom());
+	m_height = m_top - bottom;
 }
 
 void CRectangle::Move(int dx, int dy)
 { 
 	m_left += dx;
-	m_right += dx;
-	m_bottom += dy;
 	m_top += dy;
 }
 
@@ -144,28 +117,7 @@ void CRectangle::Scale(int sx, int sy)
 	{
 		return;
 	}
-	m_right += (m_right - m_left) * (sx - 1);
-	m_bottom -= (m_top - m_bottom) * (sy - 1);
-	m_height = GetTop() - GetBottom();
-	m_width = GetRight() - GetLeft();
+	m_height *= sy;
+	m_width *= sx;
 }
 
-int DetermBottom(int top, unsigned height)
-{
-	return top - height;
-}
-
-unsigned DetermHeight(int top, int bottom)
-{
-	return top - bottom;
-}
-
-int DetermRight(int left, int width)
-{
-	return left + width;
-}
-
-int DetermWidth(int left, int right)
-{
-	return right - left;
-}

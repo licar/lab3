@@ -2,8 +2,9 @@
 class CRectangle
 {
 public:
-	CRectangle(int left = 0, int top = 0,
-		int width = 0, int heigth = 0);
+	CRectangle();
+	CRectangle(int left, int top,
+		int width, int heigth);
 	~CRectangle();
 
 	unsigned GetHeight() const;
@@ -29,11 +30,4 @@ private:
 	unsigned m_width;
 	int m_left;
 	int m_top;
-	int m_right;
-	int m_bottom;
 };
-
-int DetermBottom(int top, unsigned height);
-unsigned DetermHeight(int top, int bottom);
-int DetermRight(int left, int width);
-int DetermWidth(int left, int right);
