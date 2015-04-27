@@ -82,3 +82,14 @@ BOOST_AUTO_TEST_CASE(CanScale)
 	BOOST_CHECK_EQUAL(rectangle.GetHeight(), 4);
 	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 4);
 }
+
+BOOST_AUTO_TEST_CASE(CanCheckIntersect)
+{
+	CRectangle rectangle1(0, 10, 20, 20);
+	CRectangle rectangle2(0, 10, 20, 20);
+	CRectangle rectangle3(0, 5, 10, 10);
+	CRectangle rectangle4(100, 100, 20, 20);
+	BOOST_CHECK(rectangle1.Intersect(rectangle2));
+	BOOST_CHECK(rectangle1.Intersect(rectangle3));
+	BOOST_CHECK(!rectangle1.Intersect(rectangle4));
+}

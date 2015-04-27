@@ -3,6 +3,10 @@
 #include <algorithm>
 
 CRectangle::CRectangle()
+	:m_left(0), 
+	m_top(0),
+	m_height(0), 
+	m_width(0)
 {
 }
 
@@ -71,19 +75,11 @@ void CRectangle::SetWidth(int width)
 
 void CRectangle::SetLeft(int left)
 {
-	if (left > GetRight())
-	{
-		return;
-	}
 	m_left = left;
 }
 
 void CRectangle::SetTop(int top)
 {
-	if (top < GetBottom())
-	{
-		return;
-	}
 	m_top = top;
 }
 
@@ -121,3 +117,25 @@ void CRectangle::Scale(int sx, int sy)
 	m_width *= sx;
 }
 
+bool CRectangle::Intersect(CRectangle const &other)
+{
+	int maxY = std::min(GetTop(), other.GetTop());
+	int minY = std::max(GetBottom(), other.GetBottom());
+	int maxX = std::min(GetRight(), other.GetRight());
+	int minX = std::max(GetLeft(), other.GetLeft());
+
+	if (maxX >= GetLeft() && maxX <= GetRight() &&
+		minX >= GetLeft() && minX <= GetRight() &&
+		maxY >= GetBottom() && maxY <= GetTop() &&
+		minY >= GetBottom() && minY <= GetTop())
+	{
+		m_left = minX;
+		m_top = maxY;
+		m_height = maxY - minY;
+		m_width = maxX - minX;
+		return true;
+	}
+	m_height = 0;
+	m_width = 0;
+	return false;
+}

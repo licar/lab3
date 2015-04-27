@@ -15,6 +15,7 @@ public:
 	int GetBottom() const;
 	unsigned GetArea() const;
 	unsigned GetPerimeter() const;
+	bool Intersect(CRectangle const &other);
 
 	void SetHeight(int height);
 	void SetWidth(int width);

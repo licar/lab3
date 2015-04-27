@@ -1,0 +1,12 @@
+Rectangle 1 
+	Left top  : (2;2)
+	Size : 4
+	Right bottom  : (4;0)
+	Area : 4
+	Perimetr : 8
+Rectangle 2 
+	Left top  : (11;13)
+	Size : 4
+	Right bottom  : (13;11)
+	Area : 4
+	Perimetr : 8
