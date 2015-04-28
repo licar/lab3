@@ -87,6 +87,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Rectangle\Canvas.cpp" />
     <ClCompile Include="..\Rectangle\CRectangle.cpp" />
     <ClCompile Include="Rectangle_tests.cpp" />
     <ClCompile Include="stdafx.cpp">

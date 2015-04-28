@@ -1,3 +1,1 @@
-Rectangle 10 12 1 1
-Move 1 1
-Scale 2 2 
+Rectangle 11 5 14 4

@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include "CRectangle.h"
+#include "Canvas.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ void CallCommands(ifstream &fileInput,
 	{
 		int left, top, widht, height;
 		fileInput >> left >> top 
-			>> height >> widht;
+			>> widht >> height;
 
 		rectangle.SetLeft(left);
 		rectangle.SetTop(top);
@@ -82,13 +83,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	CRectangle rectangle1;
 	CRectangle rectangle2;
 
-	if (!ReadFromFileCommands(argv[1], rectangle1))
+	if (!ReadFromFileCommands("input1.txt", rectangle1))
 	{
 		cout << "first file didn't open";
 		return 1;
 	}
 
-	if (!ReadFromFileCommands(argv[2], rectangle2))
+	if (!ReadFromFileCommands(argv[1], rectangle2))
 	{
 		cout << "second file didn't open";
 		return 1;
@@ -100,6 +101,26 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << "output file didn't open";
 		return 1;
 	}
+	
+	CCanvas canvas(60, 20);
+	FillRectangle(rectangle1, '+', canvas);
+	FillRectangle(rectangle2, '-', canvas);
+
+	if (rectangle1.Intersect(rectangle2))
+	{
+		FillRectangle(rectangle1, '#', canvas);
+	}
+
+	if (argv[3])
+	{
+		ofstream fileCanvas(argv[3]);
+		canvas.Write(fileCanvas);
+	}
+	else
+	{
+		canvas.Write(cout);
+	}
+
 	WriteDataOfRectangles(rectangle1, fileOutput, 1);
 	WriteDataOfRectangles(rectangle2, fileOutput, 2);
 	return 0;

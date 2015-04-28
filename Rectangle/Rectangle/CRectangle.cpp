@@ -5,8 +5,8 @@
 CRectangle::CRectangle()
 	:m_left(0), 
 	m_top(0),
-	m_height(0), 
-	m_width(0)
+	m_width(0),
+	m_height(0)
 {
 }
 
@@ -45,7 +45,7 @@ int CRectangle::GetRight() const
 
 int CRectangle::GetBottom() const
 {
-	return m_top - m_height;
+	return m_top + m_height;
 }
 
 int CRectangle::GetTop() const
@@ -94,11 +94,11 @@ void CRectangle::SetRight(int right)
 
 void CRectangle::SetBottom(int bottom)
 {
-	if (bottom > GetTop())
+	if (bottom < GetTop())
 	{
 		return;
 	}
-	m_height = m_top - bottom;
+	m_height = bottom - m_top;
 }
 
 void CRectangle::Move(int dx, int dy)
@@ -119,18 +119,18 @@ void CRectangle::Scale(int sx, int sy)
 
 bool CRectangle::Intersect(CRectangle const &other)
 {
-	int maxY = std::min(GetTop(), other.GetTop());
-	int minY = std::max(GetBottom(), other.GetBottom());
+	int minY = std::max(GetTop(), other.GetTop());
+	int maxY = std::min(GetBottom(), other.GetBottom());
 	int maxX = std::min(GetRight(), other.GetRight());
 	int minX = std::max(GetLeft(), other.GetLeft());
 
 	if (maxX >= GetLeft() && maxX <= GetRight() &&
 		minX >= GetLeft() && minX <= GetRight() &&
-		maxY >= GetBottom() && maxY <= GetTop() &&
-		minY >= GetBottom() && minY <= GetTop())
+		maxY >= GetTop() && maxY <= GetBottom() &&
+		minY >= GetTop() && minY <= GetBottom())
 	{
 		m_left = minX;
-		m_top = maxY;
+		m_top = minY;
 		m_height = maxY - minY;
 		m_width = maxX - minX;
 		return true;
@@ -139,3 +139,4 @@ bool CRectangle::Intersect(CRectangle const &other)
 	m_width = 0;
 	return false;
 }
+
