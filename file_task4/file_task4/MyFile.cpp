@@ -2,6 +2,7 @@
 #include "MyFile.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 
 CMyFile::CMyFile()
 	:m_file(nullptr)
@@ -70,7 +71,7 @@ bool CMyFile::PutChar(int character)
 	return true;
 }
 
-bool CMyFile::Seek(unsigned position)
+bool CMyFile::Seek(int position)
 {
 	if (fseek(m_file, position, SEEK_SET) == 0)
 	{
@@ -99,8 +100,9 @@ int CMyFile::Write(string const &str)
 		str.length(), m_file);
 }
 
-int Read(string &str, const unsigned count);
+string CMyFile::Read(const int count)
 {
-	
-
+	char * str = new char[count];
+	fread(str, count, count, m_file);
+	return (string)str;
 };

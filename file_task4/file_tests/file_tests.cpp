@@ -155,7 +155,8 @@ BOOST_AUTO_TEST_CASE(CanWriteBlock)
 	{
 		file.Open("file6.txt", "w");
 		BOOST_CHECK_EQUAL(file.Write("love"), 4);
-		//BOOST_CHECK_EQUAL(f)
+		file.Open("file6.txt", "r");
+		BOOST_CHECK_EQUAL(file.Read(4), "love");
 	}
 }
 

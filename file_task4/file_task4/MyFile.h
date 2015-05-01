@@ -18,8 +18,8 @@ public:
 	void Close();
 	int GetChar();
 	bool PutChar(int character);
-	bool Seek(unsigned position);
-	int Read(string &str, const unsigned count);
+	bool Seek(int position);
+	string Read(const int count);
 	int Write(string const &str);
 
 
