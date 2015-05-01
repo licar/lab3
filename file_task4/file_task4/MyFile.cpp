@@ -82,7 +82,7 @@ bool CMyFile::Seek(unsigned position)
 int CMyFile::GetLength()
 {
 	int currPositon = GetPosition();
-	Seek(SEEK_END);
+	fseek(m_file, 0, SEEK_END);
 	int position = GetPosition();
 	Seek(currPositon);
 	return position;
@@ -99,18 +99,8 @@ int CMyFile::Write(string const &str)
 		str.length(), m_file);
 }
 
-string CMyFile::Read(string const &str, const unsigned count)
+int Read(string &str, const unsigned count);
 {
-	char * buffer;
-	malloc(count);
-	int numberRead = fread(&buffer, count, count, m_file);
 	
-	string str;
-	for (int i = 0; i != numberRead; ++i)
-	{
-		str.push_back(buffer[i]);
-	}
 
-	}
-
-}
+};

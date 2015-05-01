@@ -19,7 +19,7 @@ public:
 	int GetChar();
 	bool PutChar(int character);
 	bool Seek(unsigned position);
-	int Read(string const &str, const unsigned count);
+	int Read(string &str, const unsigned count);
 	int Write(string const &str);
 
 
