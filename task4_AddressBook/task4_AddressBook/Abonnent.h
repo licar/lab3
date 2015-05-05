@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <list>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +15,8 @@ public:
 		string const &city,
 		string const &house,
 		unsigned apartament,
-		list<string> const &phoneNumbers,
-		list<string> const &mailAdresses);
+		vector<string> const &phoneNumbers,
+		vector<string> const &mailAdresses);
 	
 	~CAbonnent();
 
@@ -26,11 +26,9 @@ public:
 	void SetCity(string const &city);
 	void SetStreet(string const &street);
 	void SetHouse(string const &house);
-	void SetApartament(const unsigned apartament);
-	void AddPhoneNumber(string const &number);
-	void SetPhoneNumbers(list<string> const &numbers);
-	void AddMailAdress(string const &number);
-	void SetMailAdresses(list <string> const &numbers);
+	void SetApartament(const int apartament);
+	bool AddPhoneNumber(string const &newPhoneNumber);
+	bool AddMailAddress(string const &newMailAddress);
 
 	string GetName();
 	string GetSurname();
@@ -38,9 +36,9 @@ public:
 	string GetCity();
 	string GetStreet();
 	string GetHouse();
-	unsigned GetApartament();
-	list <string> GetPhoneNumbers();
-	list <string> GetMailAdresses();
+	int GetApartament();
+	vector<string> GetPhoneNumbers();
+	vector<string> GetMailAddresses();
 
 
 private:
@@ -51,10 +49,9 @@ private:
 	string m_city;
 	string m_street;
 	string m_house;
-	unsigned m_apartament;
+	int m_apartament;
 
-	list<string> m_phoneNumbers;
-	list<string> m_mailAddresses;
-
+	vector<string> m_phoneNumbers;
+	vector<string> m_mailAddresses;
 };
 
