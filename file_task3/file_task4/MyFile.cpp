@@ -42,24 +42,17 @@ bool CMyFile::IsOpened() const
 
 bool CMyFile::IsEndOfFile() const
 {
-	return (m_file && feof(m_file));
+	return (feof(m_file) && m_file);
 }
 
 int CMyFile::GetChar()
-{
-	if (IsEndOfFile())
-	{
-		return EOF;
-	}
-	
-	int character = fgetc(m_file);
-	
-	if (!character || !IsOpened())
+{	
+	if (ferror(m_file) || !IsOpened())
 	{
 		return FILE_ERROR;
 	}
 
-	return character;
+	return fgetc(m_file);
 }
 
 bool CMyFile::PutChar(int character)

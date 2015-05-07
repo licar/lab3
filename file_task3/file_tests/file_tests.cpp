@@ -10,10 +10,6 @@ BOOST_AUTO_TEST_CASE(FileCanBeOpen)
 		BOOST_CHECK(file.Open("file.txt", "r"));
 		BOOST_CHECK(file.IsOpened());
 	}
-	/*{
-		BOOST_CHECK(file.Open("file.txt", "b"));
-		BOOST_CHECK(file.IsOpened());
-	}*/
 }
 
 BOOST_AUTO_TEST_CASE(FileCanBeOpenAgain)
@@ -26,36 +22,22 @@ BOOST_AUTO_TEST_CASE(FileCanBeOpenAgain)
 		BOOST_CHECK(file.Open("file.txt", "w"));
 		BOOST_CHECK(file.IsOpened());
 	}
-	/*{
-		BOOST_CHECK(file.Open("file.txt", "r"));
-		BOOST_CHECK(file.IsOpened());
-
-		BOOST_CHECK(file.Open("file.txt", "b"));
-		BOOST_CHECK(file.IsOpened());
-	}*/
-	/*{
-		BOOST_CHECK(file.Open("file.txt", "b"));
-		BOOST_CHECK(file.IsOpened());
-
-		BOOST_CHECK(file.Open("file.txt", "r"));
-		BOOST_CHECK(file.IsOpened());
-	}*/
-
 }
 
 BOOST_AUTO_TEST_CASE(FileCanBeClose)
 {
 	CMyFile file;
-	/*{
+	{
 		BOOST_CHECK(file.Open("file.txt", "r"));
 		file.Close();
-		BOOST_CHECK(file.IsOpened());
-	}*/
-	/*{
-		file.Open("file.txt", "b");
+		BOOST_CHECK(!file.IsOpened());
+	}
+	{
+		file.Open("file.txt", "w");
 		file.Close();
-		BOOST_CHECK(file.IsOpened());
-	};*/
+		file.Close();
+		BOOST_CHECK(!file.IsOpened());
+	};
 }
 
 BOOST_AUTO_TEST_CASE(CanGetChar)
@@ -69,15 +51,16 @@ BOOST_AUTO_TEST_CASE(CanGetChar)
 		file.Close();
 	}
 	{
-		file.Open("file4.txt", "w");
+		file.Open("fileout.txt", "w");
 		int character = file.GetChar();
-		BOOST_CHECK_EQUAL(character, -1);
+		BOOST_CHECK_EQUAL(character, EOF);
 	}
-	/*{
-		file.Open("file3.txt", "b");
+	{
+		file.Open("file3.txt", "r");
 		int character = file.GetChar();
-		BOOST_CHECK_EQUAL(character, -2);
-	};*/
+		file.GetChar();
+		BOOST_CHECK_EQUAL(character, EOF);
+	};
 }
 
 BOOST_AUTO_TEST_CASE(CanCheckIsEOF)
@@ -89,13 +72,16 @@ BOOST_AUTO_TEST_CASE(CanCheckIsEOF)
 		BOOST_CHECK(file.IsEndOfFile());
 	}
 	{
-		file.Open("file3.txt", "r+");
-		file.GetChar();
+		file.Open("file2.txt", "r");
+		BOOST_CHECK(!file.IsEndOfFile());
+	}
+	{
+		file.Open("file3.txt", "w");
 		BOOST_CHECK(file.IsEndOfFile());
 	}
 	{
 		file.Open("file3.txt", "w");
-		BOOST_CHECK(!file.IsEndOfFile());
+		BOOST_CHECK(file.IsEndOfFile());
 	}
 }
 
@@ -127,7 +113,7 @@ BOOST_AUTO_TEST_CASE(CanSeek)
 		BOOST_CHECK_EQUAL(file.GetPosition(), 5);
 	}
 }
-
+/*
 BOOST_AUTO_TEST_CASE(ReturnCurrPosition)
 {
 	CMyFile file;
@@ -159,4 +145,4 @@ BOOST_AUTO_TEST_CASE(CanWriteBlock)
 		BOOST_CHECK_EQUAL(file.Read(4), "love");
 	}
 }
-
+*/
