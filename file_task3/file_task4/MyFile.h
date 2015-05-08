@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <vector>
 using namespace std;
 
 class CMyFile
@@ -19,8 +19,8 @@ public:
 	int GetChar();
 	bool PutChar(int character);
 	bool Seek(int position);
-	string Read(const int count);
-	int Write(string const &str);
+	int Read(void * ptr, size_t size, size_t count);
+	int Write(const void * ptr, size_t size, size_t count);
 
 
 	bool IsOpened() const;

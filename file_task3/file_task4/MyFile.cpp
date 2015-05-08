@@ -77,9 +77,9 @@ int CMyFile::GetLength()
 {
 	int currPositon = GetPosition();
 	fseek(m_file, 0, SEEK_END);
-	int position = GetPosition();
+	int length = GetPosition();
 	Seek(currPositon);
-	return position;
+	return length;
 }
 
 int CMyFile::GetPosition() const
@@ -87,15 +87,24 @@ int CMyFile::GetPosition() const
 	return ftell(m_file);
 }
 
-int CMyFile::Write(string const &str)
+int CMyFile::Write(const void * ptr, size_t size, size_t count)
 {
-	return fwrite(str.c_str(), str.length(),
-		str.length(), m_file);
+	int countWrite = fwrite(ptr, size, count, m_file);
+
+	if (ferror(m_file))
+	{
+		return EOF;
+	}
+	return countWrite;
 }
 
-string CMyFile::Read(const int count)
+int CMyFile::Read(void * ptr, size_t size, size_t count)
 {
-	char * str = new char[count];
-	fread(str, count, count, m_file);
-	return (string)str;
+	int countRead = fread(ptr, size, count, m_file);
+	
+	if (ferror(m_file))
+	{
+		return EOF;
+	}
+	return countRead;
 };
